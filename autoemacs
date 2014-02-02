@@ -1,0 +1,4 @@
+if [ $(pgrep emacs | wc -l) -eq 0 ]; then
+/usr/bin/emacs --daemon
+fi
+emacsclient -c -nw $*

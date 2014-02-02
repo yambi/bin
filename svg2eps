@@ -1,0 +1,5 @@
+#!/usr/bin/zsh
+for i in $*
+do
+  inkscape -T -z -f $i -E $i:r.eps
+done

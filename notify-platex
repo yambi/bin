@@ -1,0 +1,7 @@
+platex -src-specials -file-line-error -interaction=nonstopmode $*
+notify-send platex "Compiled"
+# if [  ]
+# then notify-send platex "Compile succeeded"
+# else notify-send "platex Error" ""
+# fi
+# less "$s"

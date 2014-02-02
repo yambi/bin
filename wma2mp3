@@ -1,0 +1,8 @@
+#!/usr/bin/zsh
+for i in $*
+do
+  echo $i
+  mplayer $i -ao pcm:file=$i:r.mp3
+done
+
+exit 0

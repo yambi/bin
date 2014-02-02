@@ -1,0 +1,7 @@
+#!/usr/bin/zsh
+for i in $*
+do
+  eps2eps $i temp.eps
+  epstopdf temp.eps -outfile=$i:r.pdf
+  rm temp.eps
+done

@@ -1,0 +1,12 @@
+#!/usr/bin/zsh
+events=(-e CREATE -e MODIFY -e MOVED_TO)
+while inotifywait ${events[@]} .; do
+  svgfile=`ls -rt $svg_dir | tail -n1`
+  if [ "$svgfile:e" = "svg" ] ; then
+      echo "converting $svgfile"
+      inkscape -T -z -f $svgfile -E $svgfile:r.eps
+      echo "done"
+      notify-send "converted $svgfile to $svgfile:r.eps"
+  fi
+done
+

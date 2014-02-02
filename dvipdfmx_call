@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ "$2" = "" ]; then
+   #dvipdfmx -f /home/yambi/.tex/test.map $1
+   dvipdfmx -f /home/yambi/.tex/ipa.map $1
+   #dvipdfmx $1
+else
+   #dvipdfmx -f /home/yambi/.tex/test.map -o $2 $1
+   dvipdfmx -f /home/yambi/.tex/ipa.map -o $2 $1
+   #dvipdfmx -o $2 $1
+fi

@@ -1,0 +1,7 @@
+#!/usr/bin/zsh
+for i in $*
+do
+  ffmpeg -i $i -acodec copy $i:r.mp3
+done
+
+exit 0
