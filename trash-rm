@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 TRASH_DIR=~/.Trash/
 
 while [[ $1 = -* ]]
@@ -25,5 +25,5 @@ if [ -e dst_dir ]; then :
 else
     mkdir "$dst_dir"
 fi
-echo "trash.sh: $@ -> $dst_dir"
+echo "moved to: $@ -> $dst_dir"
 mv $@ $dst_dir
