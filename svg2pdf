@@ -1,6 +1,4 @@
 #!/usr/bin/python
-#c.f. http://empitsu.hatenablog.com/entry/2013/02/06/205135
-
 import os, sys
 import re
 import tempfile
@@ -10,8 +8,6 @@ svg_ns      = 'http://www.w3.org/2000/svg'
 inkscape_ns = 'http://www.inkscape.org/namespaces/inkscape'
 sodipodi_ns = 'http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd'
 
-gs_exe = 'gs'
-is_exe = 'inkscape'
 bg_keyword = 'master'
 pi_keyword = 'pages'      
 
@@ -76,7 +72,7 @@ for i, layer in enumerate(fg_list):
     
         temp_pdf = tempfile.mkstemp(suffix='.pdf')
         os.close(temp_pdf[0])
-        cmd = '%s -C -f \"%s\" -A %s' % (is_exe, temp_svg[1], temp_pdf[1])
+        cmd = 'inkscape -C -f \"%s\" -A %s' % (temp_svg[1], temp_pdf[1])
         #print "%s\n" % cmd
         os.system(cmd)
         pdfs += '%s ' % temp_pdf[1]
