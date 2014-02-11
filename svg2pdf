@@ -12,13 +12,13 @@ sodipodi_ns = 'http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd'
 
 gs_exe = 'gs'
 is_exe = 'inkscape'
-bg_keyword = 'background'
+bg_keyword = 'master'
 pi_keyword = 'pages'      
 
 argv = sys.argv
 argc = len(argv)
 if(argc < 2):
-    print 'Usage: svg2pdf.py hoge.svg'
+    print 'Usage: svg2pdf [svg file]'
     quit()
 
 path = argv[1]
@@ -47,7 +47,9 @@ for layer in tree.findall('.//{%s}g' % svg_ns):
         layer.set('style', 'display:none')
         fg_list.append(layer)
 
-# create a temporary pdf file for each foreground layerfor i, layer in enumerate(fg_list):
+# create a temporary pdf file for each foreground layer 
+for i, layer in enumerate(fg_list):
+    print layer.get("inkscape:label");
     layer.set('style', 'display:inline')
 
     for pi in pi_list:
