@@ -23,7 +23,7 @@ done
 dst_dir=$TRASH_DIR$(date +%Y%m%d-%H%M%S)
 if [ -e dst_dir ]; then :
 else
-    mkdir "$dst_dir"
+    mkdir -p "$dst_dir"
 fi
 echo "moved to: $@ -> $dst_dir"
 mv $@ $dst_dir
