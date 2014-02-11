@@ -1,11 +1,13 @@
 #!/bin/zsh
 TRASH_DIR=~/.Trash/
 
+# skip options
 while [[ $1 = -* ]]
 do
     shift
 done
 
+# if no arguments, exit
 if [ $# -eq 0 ]
 then
     echo "usage: $0 file ..."
@@ -13,17 +15,9 @@ then
 fi
 
 for file in $@
-do
-    if [ ! -e $file ]
-    then
-        echo "$0: $file: No such file or directory"
-        exit 1
-    fi
-done
 dst_dir=$TRASH_DIR$(date +%Y%m%d-%H%M%S)
 if [ -e dst_dir ]; then :
 else
     mkdir -p "$dst_dir"
 fi
-echo "moved to: $@ -> $dst_dir"
-mv $@ $dst_dir
+mv -v $@ $dst_dir
