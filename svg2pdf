@@ -42,7 +42,7 @@ for text in tree.findall('.//{%s}text' % svg_ns):
 
 # setting all foreground layers hidden and all background visible
 for layer in tree.getroot():
-    if layer.tag==('{%s}g' % svg_ns) and layer.get('{%s}groupmode' % inkscape_ns)=="layer":
+    if layer.tag==('{%s}g' % svg_ns) and layer.get('{%s}groupmode' % inkscape_ns)=="layer" and not layer.get('{%s}label' % inkscape_ns).startswith("#"):
         if layer.get('{%s}label' % inkscape_ns)==bg_keyword:
             layer.set('style', 'display:inline')
             bg_list.append(layer)
@@ -51,7 +51,7 @@ for layer in tree.getroot():
             fg_list.append(layer)
             fg_sub=[]
             for sublayer in layer:
-                if sublayer.tag==('{%s}g' % svg_ns) and sublayer.get('{%s}groupmode' % inkscape_ns)=="layer":
+                if sublayer.tag==('{%s}g' % svg_ns) and sublayer.get('{%s}groupmode' % inkscape_ns)=="layer" and not sublayer.get('{%s}label' % inkscape_ns).startswith("#"):
                     sublayer.set('style', 'display:none')
                     fg_sub.append(sublayer)
             fg_sub_list.append(fg_sub)
@@ -60,9 +60,6 @@ for layer in tree.getroot():
 current_page = 0
 for i,layer in enumerate(fg_list):
     page_title = layer.get('{%s}label' % inkscape_ns)
-    if page_title.startswith("#"):
-        print "skip %s" % page_title
-        continue
 
     current_page+=1
     print "processing %d: %s" % (current_page,page_title);
