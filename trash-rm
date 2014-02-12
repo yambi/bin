@@ -1,23 +1,36 @@
 #!/bin/zsh
 TRASH_DIR=~/.Trash/
+NAME=${0##*/}
+
+function help(){
+    echo "usage: $NAME [-f] file ..."
+    exit 1
+}
 
 # skip options
-while [[ $1 = -* ]]
-do
-    shift
+FLG_FORCE=false
+while getopts "fh" opts
+do  case $opts in
+    f)
+      FLG_FORCE=true      ;;
+    h)
+      help                ;;
+  esac
 done
 
 # if no arguments, exit
-if [ $# -eq 0 ]
-then
-    echo "usage: $0 file ..."
-    exit 1
+if [ $# -eq 0 ]; then
+    help
 fi
 
-for file in $@
-dst_dir=$TRASH_DIR$(date +%Y%m%d-%H%M%S)
-if [ -e dst_dir ]; then :
+if $FLG_FORCE; then 
+    /bin/rm -f $@
 else
-    mkdir -p "$dst_dir"
+    for file in $@
+    dst_dir=$TRASH_DIR$(date +%Y%m%d-%H%M%S)
+    if [ -e dst_dir ]; then :
+    else
+        mkdir -p "$dst_dir"
+    fi
+    mv -v $@ $dst_dir
 fi
-mv -v $@ $dst_dir
