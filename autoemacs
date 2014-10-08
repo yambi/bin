@@ -1,4 +1,14 @@
-if [ $(pgrep emacs | wc -l) -eq 0 ]; then
-/usr/bin/emacs --daemon
-fi
-emacsclient -c -nw $*
+case "${OSTYPE}" in
+linux*)
+    if [ $(pgrep emacs | wc -l) -eq 0 ]; then
+        emacs --daemon
+    fi
+        emacsclient -c -nw $*
+    ;;
+darwin*)
+    if [ $(pgrep emacs | wc -l) -eq 0 ]; then
+        /usr/local/bin/emacs --daemon
+    fi
+        /usr/local/bin/emacsclient -c -nw $*
+    ;;
+esac

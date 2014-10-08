@@ -1,0 +1,26 @@
+#!/bin/sh
+proxy="http://proxy.noc.titech.ac.jp:3128/"
+switch_triger="titech"
+
+function set_proxy(){
+   echo "switch to titech network"
+   export HTTP_PROXY=$proxy
+   export HTTPS_PROXY=$proxy
+   export FTP_PROXY=$proxy
+   export ALL_PROXY=$proxy
+}
+
+function unset_proxy(){
+   echo "switch to automatic network"
+   unset HTTP_PROXY
+   unset HTTPS_PROXY
+   unset FTP_PROXY
+   unset ALL_PROXY
+}
+
+if [ "`networksetup -getcurrentlocation`" = "$switch_triger" ]; then
+   set_proxy
+else
+   unset_proxy
+fi
+
